@@ -7,15 +7,13 @@ import {
 interface InputProps extends ChakraInputProps {
   name: string
   label?: string
-  type: string
 }
-export function Input({ name, label, type, ...rest }: InputProps) {
+export function Input({ name, label, ...rest }: InputProps) {
   return (
     <FormControl>
       {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
       <ChakraInput
         name={name}
-        type={type}
         id={name}
         focusBorderColor="pink.500"
         bgColor="gray.900"
