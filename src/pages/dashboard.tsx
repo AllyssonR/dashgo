@@ -1,13 +1,81 @@
-import { Flex } from '@chakra-ui/react'
+import { Box, Flex, SimpleGrid, Text, theme } from '@chakra-ui/react'
+import dynamic from 'next/dynamic'
 import { Header } from '../components/Header'
 import { SideBar } from './sidebar'
-
+const Chart = dynamic(() => import('react-apexcharts'), {
+  ssr: false
+})
+//A biblioteca Apex-Charts roda somente no browser pois faz uso da função window
+//um projeto next.js usa um servidor node para gerar o html que sera exibido na pagina do site
+//com a funçao  dynanamic acima pode fazer a função react-apexcharts rodar no browser e exibir o grafico na tela
+const optionsConfig = {
+  chart: {
+    toolbar: {
+      show: false
+    },
+    zoom: {
+      enabled: false
+    },
+    foreColor: theme.colors.gray[500]
+  },
+  grid: {
+    show: false
+  },
+  dataLabels: {
+    enabled: false
+  },
+  tooltip: {
+    enabled: false
+  },
+  xaxis: {
+    type: 'datetime',
+    axisBorder: {
+      color: theme.colors.gray[600]
+    },
+    axisTicks: {
+      color: theme.colors.gray[600]
+    },
+    categories: [
+      '2021-03-18T00:00:00.000Z',
+      '2021-03-19T00:00:00.000Z',
+      '2021-03-20T00:00:00.000Z',
+      '2021-03-21T00:00:00.000Z',
+      '2021-03-22T00:00:00.000Z',
+      '2021-03-23T00:00:00.000Z',
+      '2021-03-24T00:00:00.000Z'
+    ]
+  }
+}
+const series = [{ name: 'serie', data: [31, 120, 10, 28, 61, 18, 109] }]
 export default function Dashboard() {
   return (
     <Flex direction="column" h="100vh">
       <Header />
-      <Flex w="100%" maxWidth={1480} mx="auto" px="6">
-        <SideBar/>
+      <Flex w="100%" my="6" maxWidth={1480} mx="auto" px="6">
+        <SideBar />
+        <SimpleGrid
+          flex="1"
+          gap="4"
+          minChildWidth="320px"
+          alignItems="flex-start"
+        >
+          <Box p="8" bg="gray.800" borderRadius={8} pb="4">
+            <Text fontSize="lg" mb="4">
+              Incritos da semana
+              <Chart
+                options={optionsConfig}
+                series={series}
+                type="area"
+                height={160}
+              />
+            </Text>
+          </Box>
+          <Box p="8" bg="gray.800" borderRadius={8} pb="4">
+            <Text fontSize="lg" mb="4">
+              Taxa de abertura
+            </Text>
+          </Box>
+        </SimpleGrid>
       </Flex>
     </Flex>
   )

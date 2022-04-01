@@ -9,7 +9,7 @@ export function Header() {
       h="20"
       mt="4"
       px="6"
-      align="center"
+      alignSelf="center"
     >
       <Text fontSize="3xl" fontWeight="bold" letterSpacing="tight" w="64">
         dashgo
