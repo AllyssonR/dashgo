@@ -8,7 +8,7 @@ const Chart = dynamic(() => import('react-apexcharts'), {
 //A biblioteca Apex-Charts roda somente no browser pois faz uso da função window
 //um projeto next.js usa um servidor node para gerar o html que sera exibido na pagina do site
 //com a funçao  dynanamic acima pode fazer a função react-apexcharts rodar no browser e exibir o grafico na tela
-const optionsConfig = {
+const options = {
   chart: {
     toolbar: {
       show: false
@@ -44,6 +44,15 @@ const optionsConfig = {
       '2021-03-23T00:00:00.000Z',
       '2021-03-24T00:00:00.000Z'
     ]
+  },
+  fill: {
+    opacity: 0.3,
+    type: 'gradient',
+    gradient: {
+      shade: 'dark',
+      opacityFrom: 0.7,
+      opacityTo: 0.7
+    }
   }
 }
 const series = [{ name: 'serie', data: [31, 120, 10, 28, 61, 18, 109] }]
@@ -63,7 +72,7 @@ export default function Dashboard() {
             <Text fontSize="lg" mb="4">
               Incritos da semana
               <Chart
-                options={optionsConfig}
+                options={options}
                 series={series}
                 type="area"
                 height={160}
@@ -73,6 +82,12 @@ export default function Dashboard() {
           <Box p="8" bg="gray.800" borderRadius={8} pb="4">
             <Text fontSize="lg" mb="4">
               Taxa de abertura
+              <Chart
+                options={options}
+                series={series}
+                type="area"
+                height={160}
+              />
             </Text>
           </Box>
         </SimpleGrid>
