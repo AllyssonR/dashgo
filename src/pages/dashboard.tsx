@@ -1,7 +1,7 @@
 import { Box, Flex, SimpleGrid, Text, theme } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import { Header } from '../components/Header'
-import { SideBar } from './sidebar'
+import { SideBar } from '../components/SideBar'
 const Chart = dynamic(() => import('react-apexcharts'), {
   ssr: false
 })
@@ -28,7 +28,7 @@ const options = {
     enabled: false
   },
   xaxis: {
-    type: 'datetime',
+    type: "datetime",
     axisBorder: {
       color: theme.colors.gray[600]
     },
@@ -36,13 +36,13 @@ const options = {
       color: theme.colors.gray[600]
     },
     categories: [
-      '2021-03-18T00:00:00.000Z',
-      '2021-03-19T00:00:00.000Z',
-      '2021-03-20T00:00:00.000Z',
-      '2021-03-21T00:00:00.000Z',
-      '2021-03-22T00:00:00.000Z',
-      '2021-03-23T00:00:00.000Z',
-      '2021-03-24T00:00:00.000Z'
+      '2021-03-18T00:00:00:000Z',
+      '2021-03-19T00:00:00:000Z',
+      '2021-03-20T00:00:00:000Z',
+      '2021-03-21T00:00:00:000Z',
+      '2021-03-22T00:00:00:000Z',
+      '2021-03-23T00:00:00:000Z',
+      '2021-03-24T00:00:00:000Z'
     ]
   },
   fill: {
@@ -68,7 +68,7 @@ export default function Dashboard() {
           minChildWidth="320px"
           alignItems="flex-start"
         >
-          <Box p="8" bg="gray.800" borderRadius={8} pb="4">
+          <Box p={['6', '8']} bg="gray.800" borderRadius={8} pb="4">
             <Text fontSize="lg" mb="4">
               Incritos da semana
               <Chart
@@ -79,7 +79,7 @@ export default function Dashboard() {
               />
             </Text>
           </Box>
-          <Box p="8" bg="gray.800" borderRadius={8} pb="4">
+          <Box p={['6', '8']} bg="gray.800" borderRadius={8} pb="4">
             <Text fontSize="lg" mb="4">
               Taxa de abertura
               <Chart
